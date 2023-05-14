@@ -7,11 +7,22 @@ session_start();
 $identity = $_SESSION['identity'];
 $general_id = $_SESSION['general_id'];
 //echo $general_id;
-$conn=mysqli_connect("localhost","root","12345678","system");
-$latest_post = query("SELECT * FROM post
-                      JOIN dictionary ON post.category_id = dictionary.dictionary_id
-                      where general_id = $general_id
-                      order by post_id DESC")[0];
+
+//article get
+$title = $_GET['title'];
+$category_id = $_GET['category_id'];
+$context = $_GET['context'];
+$price = $_GET['price'];
+$title = $category_id.$title;
+$categoryTrans = query("SELECT * FROM `dictionary` where dictionary_id = $category_id")[0];
+//print_r($categoryTrans['dictionary_name']);
+// echo substr("$title", 1)."<br>";
+// echo "標題：".$title."<br>";
+// echo "分類ID：".$category_id."<br>";
+// echo "內容：".$context."<br>";
+// echo "價格：".$price."<br>";
+//$conn=mysqli_connect("localhost","root","12345678","system");
+
 $sqlIDtrans =query("SELECT * FROM general_user
                     JOIN account ON general_user.account_id = account.account_id
                     WHERE general_user.general_id = $general_id")[0];
@@ -177,11 +188,11 @@ $merchants = query("SELECT * FROM merchant");
                     <div class="contract-article border" style="padding: 15px; border-radius: 10px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.2);">
                         <a class="" href="post_open1.php">
                         <!-- https://www.w3schools.com/howto/howto_css_cards.asp -->
-                        <h4>#<?php print_r($latest_post['dictionary_name'])?></h4>
-                        <h4><b><?php print_r($latest_post['title'])?></b></h4>
-                        <input type="hidden" name="title" value="<?php print_r($latest_post['title'])?>">
-                        <p><?php print_r($latest_post['context'])?></p>
-                        <input type="hidden" name="context" value="<?php print_r($latest_post['context'])?>">
+                        <h4>#<?php echo $categoryTrans['dictionary_name']?></h4>
+                        <h4><b><?php echo substr("$title", 1)?></b></h4>
+                        <input type="hidden" name="title" value="<?php echo $title?>">
+                        <p><?php echo $context?></p>
+                        <input type="hidden" name="context" value="<?php echo $context?>">
 
                         </a>
                     </div>
@@ -200,6 +211,7 @@ $merchants = query("SELECT * FROM merchant");
 
                             </div>
                             <div class="col-sm-" style="margin-left: 5px;">
+                            <input type="hidden" value="<?php echo $general_id?>" name="user_a">
                                 <h7><?php echo $sqlIDtrans['number']?></h7>
                             </div>
                         </div>
@@ -327,17 +339,14 @@ $merchants = query("SELECT * FROM merchant");
                 <!-- the third co-writer end-->
                 <br><br>
 
-
-
                 <!-- submit button -->
                     <div class="row" style="text-align: center;">
                     <div class="col-sm-12">
+
                     <input type="hidden" name="contract_status" value="簽訂中">
-                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" >送出</input>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" >送出</input>
                     </div>
-
-
-</form>
+                </form>
 <!-- form end -->
                         <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -348,12 +357,12 @@ $merchants = query("SELECT * FROM merchant");
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type=text style="text-align:center;" class="form-control" placeholder="輸入私鑰" aria-label="key">
+        <input type=text style="text-align:center;" class="form-control" name="private_key" placeholder="輸入私鑰" aria-label="key">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
         <!-- <button type="button" class="btn btn-primary" onclick="location.href='user_contract_list.php'">確認</button> -->
-       <button type="button" class="btn btn-primary" onclick="window.location.href='user_contract_list.php'">確認</button>
+       <button type="submit" class="btn btn-primary" onclick="window.location.href='user_contract_list.php'">確認</button>
 <!--          如果不能用的話，window可以改成上面那個試試看-->
       </div>
     </div>

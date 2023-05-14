@@ -162,16 +162,8 @@ $merchants = query("SELECT * FROM merchant");
                         </div>
                 </nav>
 
-                <?php
-                    //require_once('contract_conn.php');
-                    // $conn=mysqli_connect("localhost","root","12345678","system");
-                    // $sql="select * from article_contract";
-
-                    // $rs=mysqli_query($link,$sql);
-                ?>
-
                     <form>
-                        <table class="table">
+                        <table class="table" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>合約編號</th>
@@ -188,8 +180,6 @@ $merchants = query("SELECT * FROM merchant");
 //                     $link=mysqli_connect("localhost","root","12345678","system");
 // //                        $link=mysqli_connect("localhost","root");
 // //                              mysqli_select_db($link, "system");
-//                         $sql="select * from article_contract";
-//                         $rs=mysqli_query($link,$sql);
 
                         $count_id = 1;
                         for($i=0; $i<count($user_conAll); $i++){
@@ -203,9 +193,9 @@ $merchants = query("SELECT * FROM merchant");
                             echo"<td>".$sqlIDtransb['number']." ".$user_conAll[$i]['contract_status']."</td>";
                             echo"<td>".$user_conAll[$i]['context']."</td>";
                             if($user_conAll[$i]['contract_status']=="簽訂中"){
-                                echo "<td><a href='user_contract_check.php?contract_id={$user_conAll[$i]['contract_id']}'><button type='button' class='btn' style='font-size: 90%'><b>".$user_conAll[$i]['contract_status']."</b></button></a></td>";
+                                echo "<td><a href='user_contract_check.php?contract_id={".$user_conAll[$i]['contract_id']."}'><button type='button' class='btn border' style='font-size: 90%;'><b>".$user_conAll[$i]['contract_status']."</b></button></a></td>";
                             }elseif($user_conAll[$i]['contract_status']=="已簽訂"){
-                                echo "<td><a href='user_contract_view.php?contract_id={$user_conAll[$i]['contract_id']}'><button type='button' class='btn' style='font-size: 90%'><b>".$user_conAll[$i]['contract_status']."</b></button></a></td>";
+                                echo "<td><a href='user_contract_view.php?contract_id={".$user_conAll[$i]['contract_id']."}'><button type='button' class='btn border' style='font-size: 90%'><b>".$user_conAll[$i]['contract_status']."</b></button></a></td>";
 
                             }
                             $count_id++;
