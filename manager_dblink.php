@@ -9,7 +9,7 @@ $public_key=$_POST["public_key"];
 
 $link=mysqli_connect("localhost","root","12345678","system");
 //$link=mysqli_connect("localhost","root");
-  //    mysqli_select_db($link, "system");
+      mysqli_select_db($link, "system");
 
 if ($_SESSION['identity'] ==""){
     if($method=="update"){
