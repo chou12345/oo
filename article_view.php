@@ -82,23 +82,11 @@ ini_set('display_errors', 1);
                         </div>
                          <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">使用者帳號管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="suspend_view.php" class="dropdown-item">停權帳號</a>
-                             </div>
-                        </div> -->
                             <div class="nav-item dropdown">
                              <a href="#" class="nav-link" data-toggle="dropdown">平台內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="article_category.php" class="dropdown-item">文章類別</a>
                                 <a href="article_view.php" class="dropdown-item">文章內容</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                             <a href="#" class="nav-link" data-toggle="dropdown">合約內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="manager_contract_list.php" class="dropdown-item">合約管理</a>
                             </div>
                         </div>
                     </div>
@@ -156,9 +144,8 @@ ini_set('display_errors', 1);
   </thead>
             <tbody>
                  <?php
-                     $link=mysqli_connect("localhost","root","12345678","system");  
-//                        $link=mysqli_connect("localhost","root");
-//                              mysqli_select_db($link, "system");
+                   $link=mysqli_connect("localhost","root","12345678","system");  
+                    //$link=mysqli_connect("localhost","root");                                   //mysqli_select_db($link, "system");
                         $sql="select * from post 
                         join dictionary on post.category_id = dictionary.dictionary_id 
                         join general_user on post.general_id = general_user.general_id

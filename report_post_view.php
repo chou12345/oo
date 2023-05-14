@@ -98,23 +98,11 @@ session_start();
                         </div>
                          <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">使用者帳號管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="suspend_view.php" class="dropdown-item">停權帳號</a>
-                             </div>
-                        </div> -->
                             <div class="nav-item dropdown">
                              <a href="#" class="nav-link" data-toggle="dropdown">平台內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="article_category.php" class="dropdown-item">文章類別</a>
                                 <a href="article_view.php" class="dropdown-item">文章內容</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                             <a href="#" class="nav-link" data-toggle="dropdown">合約內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="manager_contract_list.php" class="dropdown-item">合約管理</a>
                             </div>
                         </div>
                     </div>
@@ -172,7 +160,7 @@ session_start();
 
                     </div>
                 </nav>
-<form action="report_post_dblink.php" method="get">
+<form action="report_post_dblink.php" method="post">
 <input type=hidden name="method" value="query"> 
 <div id="header-carousel" class="carousel slide" data-ride="carousel">
 <table class="table table-bordered table-hover" width="1000px" height="250px" style="text-align: center">
@@ -191,25 +179,30 @@ session_start();
             <tbody>
               <?php
                         $link=mysqli_connect("localhost","root","12345678","system");
-//                        $link=mysqli_connect("localhost","root");
-//                              mysqli_select_db($link, "system");
+                        //$link=mysqli_connect("localhost","root");
+                              //mysqli_select_db($link, "system");
                          date_default_timezone_set('Asia/Taipei');
-                         $deal_time = date('Y/m/d H:i:s');
+                        $deal_time = date('Y/m/d H:i:s');
                         $sql3="select * from report join post on post.post_id = report.report_post
                               join general_user on general_user.general_id = post.general_id 
-                              join dictionary on dictionary.dictionary_id = report.report_category";
+                              join dictionary on dictionary.dictionary_id = report.report_category
+                              WHERE report.status <> '已駁回' AND report.status <> '已刪除'
+                              ";
                         $rs=mysqli_query($link,$sql3);
                         while($record=mysqli_fetch_assoc($rs))
 	  {
 //                                         $record['report_object']
                             echo"<tr><td>".$record['number']."</th>
-                                     
-                                     <td>".$record['dictionary_name']."</th>
+                                     <td>".$record['reason']."</th>
                                      <td>".$record['title']."</td>
                                      <td>".$record['context']."</td>
                                      <td>
-                                     <button type='submit' name='report_id' value='".$record['report_id']."'class='btn btn' style='background-color: #acd6ff;'><b>駁回</b></button><br><br>
-                                     <button type='submit' name='post_id' value='".$record['post_id']."'class='btn btn' style='background-color: #ffd2d2;'><b>刪除</b></button></td></tr>";
+                <form method='post'>
+            <input type='hidden' name='report_id' value='".$record['report_id']."'>
+                    <button type='submit' name='cancel' value='".$record['report_id']."'class='btn btn' style='background-color: #acd6ff;'><b>駁回</b></button><br><br>
+            <input type='hidden' name='report_post' value='".$record['report_post']."'>
+            <input type='hidden' name='post_id' value='".$record['post_id']."'> 
+                    <button type='submit' name='delete' value='".$record['post_id']."'class='btn btn' style='background-color: #ffd2d2;'><b>刪除</b></button></td></tr>";
                                      
                                      
                                      

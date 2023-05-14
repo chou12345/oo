@@ -39,7 +39,7 @@ session_start();
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
+                <a href="manager_index.php" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold px-3 mr-1">輔來輔厲害</span></h1>
                 </a>
             </div>
@@ -101,23 +101,11 @@ session_start();
                         </div>
                          <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">使用者帳號管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="suspend_view.php" class="dropdown-item">停權帳號</a>
-                             </div>
-                        </div>
                             <div class="nav-item dropdown">
                              <a href="#" class="nav-link" data-toggle="dropdown">平台內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="article_category.php" class="dropdown-item">文章類別</a>
                                 <a href="article_view.php" class="dropdown-item">文章內容</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                             <a href="#" class="nav-link" data-toggle="dropdown">合約內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="manager_contract_list.php" class="dropdown-item">合約管理</a>
                             </div>
                         </div>
                     </div>
@@ -173,10 +161,10 @@ session_start();
 <?php
 
 
-	  $link=mysqli_connect("localhost","root","12345678","system");
+  $link=mysqli_connect("localhost","root","12345678","system");
 
-//        $link=mysqli_connect("localhost","root");
-//              mysqli_select_db($link, "system");
+        //$link=mysqli_connect("localhost","root");
+              //mysqli_select_db($link, "system");
         $sql="select * from manager ";
         $rs=mysqli_query($link,$sql);
 	    if ($record=mysqli_fetch_row($rs)){
@@ -201,7 +189,7 @@ session_start();
             </tr>
             <tr>
             <th scope="row" bgcolor="#ACD6FF">公鑰</th>
-            <td colspan="3" style="word-break: break-all;"><?php echo $record[8];?></td>
+            <td colspan="3" style="word-break: break-all;"><?php echo $record[7];?></td>
             </tr>
             <tr>
          </tbody>

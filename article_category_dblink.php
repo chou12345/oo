@@ -5,8 +5,8 @@ $method=$_POST["method"];
   $dictionary_kind = $_POST["dictionary_kind"];
 echo $method;
   $link=mysqli_connect("localhost","root","12345678","system");
-//  $link=mysqli_connect("localhost","root");
-//	    mysqli_select_db($link, "system");
+  //$link=mysqli_connect("localhost","root");
+	    //mysqli_select_db($link, "system");
 
 
 //  if($_SESSION['identity'] == ""){
