@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../test/platform"
+		},
+		{
+			"name": "platform",
+			"path": "../test/platform/platform"
+		}
+	],
+	"settings": {}
+}
