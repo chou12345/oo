@@ -29,7 +29,7 @@ if (isset($_POST['cancel'])) {
     $link=mysqli_connect("localhost","root","12345678","system");
     //$link = mysqli_connect("localhost", "root");
     //mysqli_select_db($link, "system");
-    $sql1 = "UPDATE reply SET context = '****' WHERE reply_id = '$reply_id'";
+    $sql1 = "UPDATE reply SET context = '此留言已被刪除' WHERE reply_id = '$reply_id'";
     $sql2 = "UPDATE report SET status = '已刪除' ,deal_time='$deal_time' WHERE report_reply = '$report_reply'";
     if (mysqli_query($link, $sql1) && mysqli_query($link, $sql2)) {
         header('location:report_reply_view.php?method=query');
