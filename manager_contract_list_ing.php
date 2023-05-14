@@ -187,11 +187,12 @@ require_once __DIR__ . '/helpers/helper.php';
                                     echo"<td>".$man_conAll[$i]['context']."</td>";
                                     //echo"<td><button type=submit class=btn style=font-size: 90% onclick=location.href='merchant_contract_view.php'><b>".$merchant_conAll[$i]['contract_status']."</td></tr>";
                                     if($man_conAll[$i]['contract_status']=="簽訂中"){
-                                        echo "<td><a href='manager_contract_check.php?contract_id={$man_conAll[$i]['contract_id']}'><button type='button' class='btn' style='font-size: 90%'><b>".$man_conAll[$i]['contract_status']."</b></button></a></td>";
-                                    }elseif($man_conAll[$i]['contract_status']=="已簽訂"){
-                                        echo "<td><a href='manager_contract_view.php?contract_id={$man_conAll[$i]['contract_id']}'><button type='button' class='btn' style='font-size: 90%'><b>".$man_conAll[$i]['contract_status']."</b></button></a></td>";
+                                        echo "<td><a href='manager_contract_check.php?contract_id={".$man_conAll[$i]['contract_id']."}'><button type='button' class='btn border' style='font-size: 90%'><b>".$man_conAll[$i]['contract_status']."</b></button></a></td>";
+                                     }
+                                    //elseif($man_conAll[$i]['contract_status']=="已簽訂"){
+                                    //     echo "<td><a href='manager_contract_view.php?contract_id={$man_conAll[$i]['contract_id']}'><button type='button' class='btn' style='font-size: 90%'><b>".$man_conAll[$i]['contract_status']."</b></button></a></td>";
 
-                                    }
+                                    // }
 
                             $count_id++;
                         }
