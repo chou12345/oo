@@ -43,7 +43,7 @@ if ($_SESSION['identity'] == "manager") {
         echo "更新資料表時發生錯誤: " . mysqli_error($link);
     }
 }
-
+}
 // 最後執行頁面重定向
 header('location: report_post_view.php?method=query');
 

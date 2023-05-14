@@ -8,8 +8,7 @@ echo $method;
   //$link=mysqli_connect("localhost","root");
 	    //mysqli_select_db($link, "system");
 
-
-//  if($_SESSION['identity'] == ""){
+if($_SESSION['identity'] == "manager"){
 if($method=="insert"){
 $sql="insert into dictionary (dictionary_id,dictionary_kind,dictionary_name)values (NULL,'文章','$dictionary_name')";
       echo $sql;
@@ -20,4 +19,5 @@ $sql="insert into dictionary (dictionary_id,dictionary_kind,dictionary_name)valu
           echo "Insert failed: " . mysqli_error($link);
       }
   }
+}
       ?>

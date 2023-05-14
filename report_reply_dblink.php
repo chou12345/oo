@@ -37,7 +37,7 @@ if (isset($_POST['cancel'])) {
         echo "更新資料表時發生錯誤: " . mysqli_error($link);
     }
 }
-//}
+}
 ?>
 
 
