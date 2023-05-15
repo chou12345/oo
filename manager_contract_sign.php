@@ -167,46 +167,30 @@ session_start();
                 // $sqlfi = "INSERT INTO `profit_contract` (`contract_id`, `manager_id`, `merchant_id`, `title`, `context`, `profit_manager`, `profit_merchant`, `start_time`, `contract_status`) VALUES (NULL, '-1', '12345678', '智能合約', 't', '10', '90', '2023-05-02 00:00:00', '簽訂中');";
                 // mysqli_query($conn, $sqlfi);
 
-            // $link=mysqli_connect("localhost","root","12345678","system");
-//             $link=mysqli_connect("localhost","root");
-//              $sql=mysqli_select_db($link, "system");
-                //   $rs=mysqli_query($link,$sql);
-                // $record=mysqli_fetch_row($rs);
-                ?>
-            <!-- fifi testing -->
             <form method="post" action="contract_conn.php">
             <input type="hidden" name="method" value="manager_insert">
-
-
-            <!-- <form method="post" action="manager_contract_dblink.php"> -->
-            <!-- <input type=hidden name="method" value="insert"> -->
             <input type=hidden name="title" value="智能合約">
                 <input type="hidden" name="manager_id" value="1">
-                <input type="hidden" name="start_time" value="<?php echo $start_time?>">
+                <input type="hidden" name="start_time" value="">
                 <input type="hidden" name="contract_status" value="簽訂中">
                  <input type="hidden" name="status_manager" value="接受">
                  <input type="hidden" name="status_merchant" value="待確認">
             <div class="card mb-3" style="padding: 30px 50px 30px 50px">
                              <h1 align="center" style="margin-top: 10px;">簽訂智能合約</h1>
-
-
                     <br><p>
                                                 茲雙方基於共同利益，就特約事項雙方同意共同遵守下列約定：
                                                  </p>
-
                                             <div class="card-body">
                                              <div class="contract-article border" style="padding: 15px; border-radius: 10px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.2);">
-
                                             <!-- https://www.w3schools.com/howto/howto_css_cards.asp -->
                                             <h4 >#簽約內容</h4>
                                             <p>商家方提供之優惠項目：</p>
                                             <ol>
                                                 <input type="text" name="context">
-
                                             </ol>
                                                  <p>平台方提供之項目：</p>
-                                                 <p>1. 於平台方網站提供商家方之資訊及優惠訊息露出。</p>
-                                                 <p>2. 商家於平台內累積coin得轉為新台幣。</p>
+                                                 <p>1. 於平台方網站提供商家方之資訊。</p>
+                                                 <p>2. 商家於平台內累積之coin得轉為新台幣(1:1)。</p>
                                         </div>
                                             <br><br>
                                             <div class="row">
@@ -218,9 +202,6 @@ session_start();
                                                     <h7>輔來輔厲害</h7>
                                                 </div>
                                             </div>
-
-
-<!--                                          <hr>-->
                                             <br>
                                             <!-- test -->
                                            <table style="width: 100%">
@@ -280,15 +261,7 @@ session_start();
 
                                                 </td>
                                             </tr>
-<!--
-                                            <tr style="width: 60%;">
-                                                <td><h7 class="mb-0">Donate coin</h7></td>
-
-                                            </tr>
--->
-                                                </table></div></div>
-
-<!--                    改-->
+                                    </table></div></div>
                               <br><br><br>
 
                                          <div class="row" style="text-align: center;">
@@ -332,10 +305,6 @@ session_start();
                                     </div>
 
                                   </div>
-
-
-
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
