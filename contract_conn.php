@@ -142,20 +142,35 @@
     }
     echo $sqlCheck;
     if (mysqli_query($conn, $sqlCheck)){
-      echo "okok";
-      //header('location:user_contract_list.php');
+      //echo "okok";
+      header('location:user_contract_list.php');
     }
 
   }
 
+  //商家確認合約
   //merchant_check(update)
   else if($method == "merchant_check"){
-    $sql = "update profit_contract set start_time = '$start_time', contract_status='$contract_status' where contract_id = '$contract_id_mer'";
-    //echo $sql;
-    if (mysqli_query($conn, $sql))
+    $sql = query("select * from profit_contract where contract_id = $contract_id_mer;")[0];
+
+      //判斷回應結果
+      if($contract_check==1){
+        echo"yes";
+          $sqlCheck = "update profit_contract set status_merchant = '接受',
+                       contract_status='已簽訂'
+                       where contract_id = '$contract_id_mer';";
+          echo $sqlCheck;
+      }elseif($contract_check==0){
+        echo 'no';
+        $sqlCheck = "update profit_contract set status_merchant = '駁回',
+                      contract_status='已駁回'
+                        where contract_id = '$contract_id_mer';";
+      }
+    if (mysqli_query($conn, $sqlCheck))
+    echo 'okok';
       header('location:merchant_contract_list.php');
   }
-
+  //管理者建立合約
  else if ($method == "manager_insert") {
     //echo $method;
     if (isset($_POST['private_key'])) {
@@ -180,8 +195,8 @@
             $start_time  = date('Y/m/d H:i:s');
             $contract_status = $_POST['contract_status'];
 
-            $insertSql = "INSERT INTO profit_contract (contract_id, manager_id, merchant_id, title, context, profit_manager, profit_merchant, start_time, contract_status)
-                          VALUES (NULL, '$manager_id', '$merchant_id', '$title', '$context', '$profit_manager', '$profit_merchant', '$start_time', '$contract_status')";
+            $insertSql = "INSERT INTO profit_contract (contract_id, manager_id, merchant_id, title, context, profit_manager, profit_merchant, start_time, status_manager, status_merchant, contract_status)
+                          VALUES (NULL, '$manager_id', '$merchant_id', '$title', '$context', '$profit_manager', '$profit_merchant', '$start_time', '接受', '待確認', '$contract_status')";
 
             if (mysqli_query($conn, $insertSql)) {
                 mysqli_close($conn);

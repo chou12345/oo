@@ -125,9 +125,6 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
                                 <?php  } ?>
                             </div>
                         </div>
-
-
-
                     </div>
                 </nav>
 
@@ -196,8 +193,8 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
 
                                             </ol>
                                                  <p>平台方提供之項目：</p>
-                                                 <p>1. 於平台方網站提供商家方之資訊及優惠訊息露出。</p>
-                                                 <p>2. 商家於平台內累積coin得轉為新台幣。</p>
+                                                 <p>1. 於平台方網站提供商家方之資訊。</p>
+                                                 <p>2. 商家於平台內累積coin得轉為新台幣(1:1)。</p>
 
                                         </div>
                                         <br><br>
@@ -268,15 +265,15 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
 
                                          <div class="row" style="text-align: center;">
                                         <div class="col-sm-12">
-                                              <input type="hidden" name="contract_status" value="已簽訂">
+                                              <!-- <input type="hidden" name="contract_status" value="已簽訂"> -->
                                               <input type="hidden" name="contract_id_mer" value="<?php echo $contract_id_mer?>">
-                                              <input type="hidden" name="start_time" value="<?php echo $start_time?>">
 
-
-                                              <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" style="margin-right: 150px;">接受!</button>
-                                              <button type="button"  class="btn btn-primary "
-                                              data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                              target="__blank">駁回。</button>
+                                              <button type="submit" class="btn btn-primary" name="contract_check" value="1"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" style="margin-right: 150px;">
+                                                接受!</button>
+                                              <button type="submit"  class="btn btn-primary " name="contract_check" value="0"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"target="__blank">
+                                                駁回。</button>
                                 </form>
 <!--    Modal  -->
  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

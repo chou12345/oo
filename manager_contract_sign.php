@@ -123,20 +123,6 @@ session_start();
                     </div>
                 </nav>
             </div>
-
-<!--
-<!--
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                       <a href="" class="nav-item nav-link">Shoes</a>
--->
-
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
@@ -159,55 +145,29 @@ session_start();
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </nav>
-<!--            改-->
-                <?php
-                //fifi testing
-                $conn=mysqli_connect("localhost","root");
-                     mysqli_select_db($conn, "system");
-//                $conn=mysqli_connect("localhost","root","12345678","system");
-                date_default_timezone_set('Asia/Taipei');
-                $start_time = date('Y/m/d H:i:s');
-                // $sqlfi = "INSERT INTO `profit_contract` (`contract_id`, `manager_id`, `merchant_id`, `title`, `context`, `profit_manager`, `profit_merchant`, `start_time`, `contract_status`) VALUES (NULL, '-1', '12345678', '智能合約', 't', '10', '90', '2023-05-02 00:00:00', '簽訂中');";
-                // mysqli_query($conn, $sqlfi);
 
-            // $link=mysqli_connect("localhost","root","12345678","system");
-//             $link=mysqli_connect("localhost","root");
-//              $sql=mysqli_select_db($link, "system");
-                //   $rs=mysqli_query($link,$sql);
-                // $record=mysqli_fetch_row($rs);
-                ?>
-            <!-- fifi testing -->
             <form method="post" action="contract_conn.php">
             <input type="hidden" name="method" value="manager_insert">
-
-
-            <!-- <form method="post" action="manager_contract_dblink.php"> -->
-            <!-- <input type=hidden name="method" value="insert"> -->
             <input type=hidden name="title" value="智能合約">
                 <input type="hidden" name="manager_id" value="1">
-                <input type="hidden" name="start_time" value="<?php echo $start_time?>">
+                <input type="hidden" name="start_time" value="">
                 <input type="hidden" name="contract_status" value="簽訂中">
             <div class="card mb-3" style="padding: 30px 50px 30px 50px">
                              <h1 align="center" style="margin-top: 10px;">簽訂智能合約</h1>
-
-
                     <br><p>
                                                 茲雙方基於共同利益，就特約事項雙方同意共同遵守下列約定：
                                                  </p>
-
                                             <div class="card-body">
                                              <div class="contract-article border" style="padding: 15px; border-radius: 10px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.2);">
-
                                             <!-- https://www.w3schools.com/howto/howto_css_cards.asp -->
                                             <h4 >#簽約內容</h4>
                                             <p>商家方提供之優惠項目：</p>
                                             <ol>
                                                 <input type="text" name="context">
-
                                             </ol>
                                                  <p>平台方提供之項目：</p>
-                                                 <p>1. 於平台方網站提供商家方之資訊及優惠訊息露出。</p>
-                                                 <p>2. 商家於平台內累積coin得轉為新台幣。</p>
+                                                 <p>1. 於平台方網站提供商家方之資訊。</p>
+                                                 <p>2. 商家於平台內累積之coin得轉為新台幣(1:1)。</p>
                                         </div>
                                             <br><br>
                                             <div class="row">
@@ -219,9 +179,6 @@ session_start();
                                                     <h7>輔來輔厲害</h7>
                                                 </div>
                                             </div>
-
-
-<!--                                          <hr>-->
                                             <br>
                                             <!-- test -->
                                            <table style="width: 100%">
@@ -243,38 +200,7 @@ session_start();
                                             </tr>
 -->
                                         </table>
-<!--                                        <hr>-->
 
-                                            <!-- test -->
-<!--
-                                            <div class="row" >
-                                                <div class="col-sm-4">
-                                                <h7 class="mb-0">解鎖coin</h7>
-                                                </div>
-                                            <div class="row">
-
-
-                                            </div>
-
-                                          </div>
--->
-<!--
-                                            <br>
-                                          <div class="row" >
-                                            <div class="col-sm-4">
-                                              <h7 class="mb-0">Donate coin</h7>
-                                            </div>
-
-                                            <div class="row">
-                                            <div class="col-">
-                                             <input type="text" style="margin-left: 5px;" class="form-control" placeholder="分潤趴數(0~100的整數)" aria-label="First name">
-                                                </div>
-                                                <div class="col-" style="margin-left: 10px;">
-                                                    <h7>%</h7>
-                                                    </div>
-                                            </div>
-                                          </div>
--->
                                             <br>
                                             <br>
                                         <div class="row">
@@ -309,15 +235,7 @@ session_start();
 
                                                 </td>
                                             </tr>
-<!--
-                                            <tr style="width: 60%;">
-                                                <td><h7 class="mb-0">Donate coin</h7></td>
-
-                                            </tr>
--->
-                                                </table></div></div>
-
-<!--                    改-->
+                                    </table></div></div>
                               <br><br><br>
 
                                          <div class="row" style="text-align: center;">
@@ -350,29 +268,6 @@ session_start();
                                         </div>
                                       </div>
 
-
-
-
-<!--
-                                      <div class="row gutters-sm">
-                                        <div class="col-sm-6 mb-3">
-                                          <div class="card h-100">
-                                            <div class="card-body">
-                                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">我的</i>活動紀錄</h6>
-                                              <small>發布過幾篇文章:3篇</small>
-                                              <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
-                                              <small>文章獲得的coin:450</small>
-                                              <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        </div>
--->
                                       </div>
 
 
@@ -380,10 +275,6 @@ session_start();
                                     </div>
 
                                   </div>
-
-
-
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
