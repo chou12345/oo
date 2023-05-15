@@ -16,12 +16,6 @@ $price = $_GET['price'];
 $title = $category_id.$title;
 $categoryTrans = query("SELECT * FROM `dictionary` where dictionary_id = $category_id")[0];
 //print_r($categoryTrans['dictionary_name']);
-// echo substr("$title", 1)."<br>";
-// echo "標題：".$title."<br>";
-// echo "分類ID：".$category_id."<br>";
-// echo "內容：".$context."<br>";
-// echo "價格：".$price."<br>";
-//$conn=mysqli_connect("localhost","root","12345678","system");
 
 $sqlIDtrans =query("SELECT * FROM general_user
                     JOIN account ON general_user.account_id = account.account_id

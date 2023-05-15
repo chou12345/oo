@@ -91,7 +91,6 @@ $merchants = query("SELECT * FROM merchant");
                     <div class="dropdown-menu position-absolute bg-secondary">
                         <a href="user_information.php" class="dropdown-item">個人資料</a>
                         <a href="user_heart.php" class="dropdown-item">我的收藏</a>
-                        <a href="user_follow.php" class="dropdown-item">我的追蹤</a>
                         <a href="user_contract_list.php" class="dropdown-item">我的合約</a>
                         <a href="user_post.php" class="dropdown-item">我的文章</a>
                         <a href="log_out.php" class="dropdown-item">登出</a>
@@ -186,7 +185,10 @@ $merchants = query("SELECT * FROM merchant");
                             $user_bid = $user_conAll[$i]['user_B'];
                             $sqlIDtransb =query("SELECT * FROM general_user
                                                 WHERE general_id = $user_bid")[0];
-                            echo"<tr><td>".$count_id."</td>";
+                            echo "<tr>";
+                            echo "<td><i class='fas fa-check-circle' style='align:center; color:green;'></i></td>";
+
+                            //echo"<tr><td>".$count_id."</td>";
                             echo"<td>".$sqlIDtransa['number']."</td>";
                             echo"<td>".$user_conAll[$i]['start_time']."</td>";
                             //echo"<td>".$user_conAll[$i]['user_B'].$user_conAll[$i]['contract_status']."</td>";

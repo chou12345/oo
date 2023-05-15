@@ -10,8 +10,8 @@
     //echo $contract_id_user;
     $contractView = query("select * from article_contract where contract_id = $contract_id_user")[0];
     $sqlIDtrans =query("SELECT * FROM general_user
-    JOIN account ON general_user.account_id = account.account_id
-    WHERE general_user.general_id = $general_id")[0];
+                        JOIN account ON general_user.account_id = account.account_id
+                        WHERE general_user.general_id = $general_id")[0];
     $user_bid = $contractView['user_B'];
     $sqlIDtransb =query("SELECT * FROM general_user WHERE general_id = $user_bid")[0];
 
@@ -88,7 +88,6 @@
                     <div class="dropdown-menu position-absolute bg-secondary">
                         <a href="user_information.php" class="dropdown-item">個人資料</a>
                         <a href="user_heart.php" class="dropdown-item">我的收藏</a>
-                        <a href="user_follow.php" class="dropdown-item">我的追蹤</a>
                         <a href="user_contract_list.php" class="dropdown-item">我的合約</a>
                         <a href="user_post.php" class="dropdown-item">我的文章</a>
                         <a href="log_out.php" class="dropdown-item">登出</a>
@@ -152,23 +151,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <h2 align="center" style="margin-top: 10px;"></h2>
                         </div>
-
-                            <!-- <a href="post_po.php" class="btn border">
-                    <i class="fas fa-pen-nib text-primary"></i>
-                    <span class="badge">發文</span>
-                </a>
-                              <a href="user_wallet.php" class="btn border">
-                    <i class="fas fa-piggy-bank text-primary"></i>
-                    <span class="badge">錢包</span>
-                </a> -->
-                        <!-- <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">登入</a>
-                            <a href="" class="nav-item nav-link">註冊</a>
-                        </div> -->
-
                     </div>
                 </nav>
-
 
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
@@ -187,12 +171,7 @@
                 <div class="card mb-3" style="padding: 30px 50px 30px 50px">
                 <form method="post" action="contract_conn.php">
                     <h1 align="center" style="margin-top: 10px;">確認智能合約</h1>
-                    <?php
-                    $conn=mysqli_connect("localhost","root","12345678","system");
-                    $result = mysqli_query($conn,$sql);
-                    date_default_timezone_set('Asia/Taipei');
-                    $start_time  = date('Y/m/d H:i:s');
-                    ?>
+
                     <input type="hidden" name="method" value="check">
                     <div class="card-body">
 
@@ -200,7 +179,8 @@
                         <a class="" href="post_open1.php">
                         <!-- https://www.w3schools.com/howto/howto_css_cards.asp -->
                         <h4>#選課</h4>
-                        <h4><b><?php echo $contractView['title']?></b></h4>
+                        <?php $title = $contractView['title']?>
+                        <h4><b><?php echo substr($title, 1)?></b></h4>
                         <p><?php echo $contractView['context']?></p>
                         </a>
                     </div>
@@ -281,11 +261,13 @@
                         <div class="col-sm-12">
                         <input type="hidden" name="contract_id_user" value="<?php echo $contract_id_user?>">
 
-                        <input type="contract_hidden" name="status" value="已簽訂">
-                            <button type="submit" class="btn btn-primary "
+                        <!-- <input type="hidden" name="contract_status" value="已簽訂"> -->
+                        <!-- <input type="hidden" name="contract_status" value="已駁回"> -->
+
+                            <button type="submit" name="contract_check" value="1" class="btn btn-primary "
                         data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                         target="__blank"style="margin-right: 150px;">接受！</button>
-                            <button type="submit"  class="btn btn-primary "
+                            <button type="submit"  name="contract_check" value="0" class="btn btn-primary "
                         data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                     target="__blank">駁回。</button>
                         </form>
