@@ -20,16 +20,16 @@
    //$status_a=$_POST["status_a"];
    //$status_b=$_POST["status_b"];
    //$status_c=$_POST["status_c"];
-  if(isset($user_a)){
-    $status_a = "待確認";
-  }
-  if(isset($user_b)){
-    $status_b = "待確認";
-  }
-  if(isset($user_c)){
-    $status_c = "待確認";
-  }
-  echo $status_c;
+//  if(isset($user_a)){
+//    $status_a = "待確認";
+//  }
+//  if(isset($user_b)){
+//    $status_b = "待確認";
+//  }
+//  if(isset($user_c)){
+//    $status_c = "待確認";
+//  }
+//  echo $status_c;
 //   $status_a=$_POST["status_a"];
 //   $status_b=$_POST["status_b"];
 //   $status_c=$_POST["status_c"];
@@ -64,7 +64,7 @@
     die('資料庫連線錯誤:' . $conn->connect_error);
   }
 
-  user_insert
+  //user_insert
   if($method == "insert"){
     //echo $user_b;
     //echo $recordID[25];
