@@ -1,6 +1,8 @@
 <?php
 function query($sql, $fetch = true)
 {
+//    $link = mysqli_connect("localhost", "root");
+//            mysqli_select_db($link, "system");
     $link = mysqli_connect('localhost', 'root', '12345678', 'system');
     $result = mysqli_query($link, $sql);
 

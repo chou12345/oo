@@ -16,9 +16,9 @@
   $profit_c=$_POST["profit_c"];
   $start_time  = date('Y/m/d H:i:s');
   $contract_status=$_POST["contract_status"];
-//   $status_a=$_POST["status_a"];
-//   $status_b=$_POST["status_b"];
-//   $status_c=$_POST["status_c"];
+   $status_a=$_POST["status_a"];
+   $status_b=$_POST["status_b"];
+   $status_c=$_POST["status_c"];
   if(isset($user_a)){
     $status_a = "待確認";
   }
@@ -35,12 +35,14 @@
   $merchant_id = $_POST["merchant_id"];
   $profit_manager= $_POST["profit_manager"];
   $profit_merchant = $_POST["profit_merchant"];
+  $status_manager = $_POST["status_manager"];
+  $status_merchant = $_POST["status_merchant"];
   $contract_id_mer = $_POST["contract_id_mer"];
   $contract_id_user = $_POST["contract_id_user"];
 
   $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
-  //$conn = mysqli_connect("localhost", "root");
-          //mysqli_select_db($conn, "system");
+//  $conn = mysqli_connect("localhost", "root");
+//          mysqli_select_db($conn, "system");
 
   $sqlIDtransb ="SELECT * FROM `general_user`
                 JOIN account ON general_user.account_id = account.account_id
@@ -57,7 +59,7 @@
     die('資料庫連線錯誤:' . $conn->connect_error);
   }
 
-  //user_insert
+  user_insert
   if($method == "insert"){
     //echo $user_b;
     //echo $recordID[25];
@@ -119,9 +121,9 @@
     //echo $method;
     if (isset($_POST['private_key'])) {
         $private_key = $_POST['private_key'];
-        //$conn=mysqli_connect("localhost","root");
-              //mysqli_select_db($conn, "system");
-        $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
+        $conn=mysqli_connect("localhost","root");
+              mysqli_select_db($conn, "system");
+        //$conn = mysqli_connect('localhost', 'root', '12345678', 'system');
         if (!$conn) {
             die("連線失敗：" . mysqli_connect_error());
         }
@@ -138,9 +140,12 @@
             $profit_merchant = $_POST['profit_merchant'];
             $start_time  = date('Y/m/d H:i:s');
             $contract_status = $_POST['contract_status'];
-
-            $insertSql = "INSERT INTO profit_contract (contract_id, manager_id, merchant_id, title, context, profit_manager, profit_merchant, start_time, contract_status)
-                          VALUES (NULL, '$manager_id', '$merchant_id', '$title', '$context', '$profit_manager', '$profit_merchant', '$start_time', '$contract_status')";
+            $status_manager = $_POST['status_manager'];
+            $status_merchant = $_POST['status_merchant'];
+            
+            
+            $insertSql = "INSERT INTO profit_contract (contract_id, manager_id, merchant_id, title, context, profit_manager, profit_merchant, start_time,status_manager,status_merchant, contract_status)
+                          VALUES (NULL, '$manager_id', '$merchant_id', '$title', '$context', '$profit_manager', '$profit_merchant', '$start_time', '$status_manager','$status_merchant','$contract_status')";
 
             if (mysqli_query($conn, $insertSql)) {
                 mysqli_close($conn);
@@ -150,10 +155,10 @@
                 echo "新增合約內容至資料庫失敗：" . mysqli_error($conn);
             }
         } else {
-            echo "私鑰不存在於資料庫中";
+            echo '<script>alert("輸入錯誤");window.location.href ="manager_contract_sign.php"; </script>';
         }
     } else {
-        echo "未提供私鑰";
+        echo '<script>alert("輸入錯誤");window.location.href ="manager_contract_sign.php";</script>';
     }
 }
 

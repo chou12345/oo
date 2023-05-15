@@ -31,6 +31,28 @@ session_start();
     <!--bootstrap-->
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--    計算100-->
+    <script>
+  function calculateAndValidate() {
+    var profit_manager = parseInt(document.getElementById('profit_manager').value);
+    var profit_merchant = parseInt(document.getElementById('profit_merchant').value);
+
+    var total = profit_manager + profit_merchant;
+    if (total === 100) {
+      $('#private_key_input').modal('show');
+}
+     else {
+      alert('总和不等于100。');
+      $('#private_key_input').modal('hide');
+    }
+  }
+
+  function submitForm() {
+    // 在这里执行表单提交或其他相关操作
+    document.querySelector("form").submit();
+  }
+</script>
 </head>
 
 <body>
@@ -97,25 +119,12 @@ session_start();
                         </div>
                          <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-<!--
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">使用者帳號管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="suspend_view.php" class="dropdown-item">停權帳號</a>
-                             </div>
-                        </div>
--->
+
                             <div class="nav-item dropdown">
                              <a href="#" class="nav-link" data-toggle="dropdown">平台內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="article_category.php" class="dropdown-item">文章類別</a>
                                 <a href="article_view.php" class="dropdown-item">文章內容</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                             <a href="#" class="nav-link" data-toggle="dropdown">合約內容管理<i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="manager_contract_list.php" class="dropdown-item">合約管理</a>
                             </div>
                         </div>
                     </div>
@@ -124,18 +133,6 @@ session_start();
                 </nav>
             </div>
 
-<!--
-<!--
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                       <a href="" class="nav-item nav-link">Shoes</a>
--->
 
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
@@ -162,9 +159,9 @@ session_start();
 <!--            改-->
                 <?php
                 //fifi testing
-                $conn=mysqli_connect("localhost","root");
-                     mysqli_select_db($conn, "system");
-//                $conn=mysqli_connect("localhost","root","12345678","system");
+//                $conn=mysqli_connect("localhost","root");
+//                     mysqli_select_db($conn, "system");
+                $conn=mysqli_connect("localhost","root","12345678","system");
                 date_default_timezone_set('Asia/Taipei');
                 $start_time = date('Y/m/d H:i:s');
                 // $sqlfi = "INSERT INTO `profit_contract` (`contract_id`, `manager_id`, `merchant_id`, `title`, `context`, `profit_manager`, `profit_merchant`, `start_time`, `contract_status`) VALUES (NULL, '-1', '12345678', '智能合約', 't', '10', '90', '2023-05-02 00:00:00', '簽訂中');";
@@ -187,6 +184,8 @@ session_start();
                 <input type="hidden" name="manager_id" value="1">
                 <input type="hidden" name="start_time" value="<?php echo $start_time?>">
                 <input type="hidden" name="contract_status" value="簽訂中">
+                 <input type="hidden" name="status_manager" value="接受">
+                 <input type="hidden" name="status_merchant" value="待確認">
             <div class="card mb-3" style="padding: 30px 50px 30px 50px">
                              <h1 align="center" style="margin-top: 10px;">簽訂智能合約</h1>
 
@@ -230,7 +229,8 @@ session_start();
                                                 <td rowspan="2" style="vertical-align:middle;">
 
                                                 <div class="row" style="vertical-align:middle;">
-                                                    <div><input type="text" style="padding-left: 5px; width:100px; height: 100px;font-size:25px;text-align:center;" class="form-control" placeholder="分潤" aria-label="First name" name=profit_manager></div>
+                                                    <div><input type="text" style="padding-left: 5px; width:100px; height: 100px;font-size:25px;text-align:center;" class="form-control" placeholder="分潤" aria-label="First name" name=profit_manager
+                                                    id="profit_manager"></div>
                                                     <div style="padding: 28px 0px 0px 15px;font-size:30px"><h7>%</h7></div>
                                                 </div>
 
@@ -243,38 +243,7 @@ session_start();
                                             </tr>
 -->
                                         </table>
-<!--                                        <hr>-->
 
-                                            <!-- test -->
-<!--
-                                            <div class="row" >
-                                                <div class="col-sm-4">
-                                                <h7 class="mb-0">解鎖coin</h7>
-                                                </div>
-                                            <div class="row">
-
-
-                                            </div>
-
-                                          </div>
--->
-<!--
-                                            <br>
-                                          <div class="row" >
-                                            <div class="col-sm-4">
-                                              <h7 class="mb-0">Donate coin</h7>
-                                            </div>
-
-                                            <div class="row">
-                                            <div class="col-">
-                                             <input type="text" style="margin-left: 5px;" class="form-control" placeholder="分潤趴數(0~100的整數)" aria-label="First name">
-                                                </div>
-                                                <div class="col-" style="margin-left: 10px;">
-                                                    <h7>%</h7>
-                                                    </div>
-                                            </div>
-                                          </div>
--->
                                             <br>
                                             <br>
                                         <div class="row">
@@ -293,7 +262,8 @@ session_start();
                                                 <td>
                                                 id:
                                                 <div class="row" style="float:right ;margin-bottom:20px">
-                                                <div><input type="text" style="padding-right:40px;width:220px;text-align:center;" class="form-control" placeholder="輸入id" aria-label="First name" name="merchant_id"></div>
+                                                <div><input type="text" style="padding-right:40px;width:220px;text-align:center;" class="form-control" placeholder="輸入id" aria-label="First name" name="merchant_id"
+                                                ></div>
                                                     </div>
                                                 </td>
                                                 </tr>
@@ -303,7 +273,8 @@ session_start();
 
                                                 <div class="row" style="vertical-align:middle;">
                                                     <div>
-                                                        <input type="text" style="padding-left: 5px; width:100px; height: 100px;font-size:25px;text-align:center;" class="form-control" placeholder="分潤" aria-label="First name" name="profit_merchant"></div>
+                                                        <input type="text" style="padding-left: 5px; width:100px; height: 100px;font-size:25px;text-align:center;" class="form-control" placeholder="分潤" aria-label="First name" name="profit_merchant"
+                                                        id="profit_merchant"      ></div>
                                                     <div style="padding: 28px 0px 0px 15px;font-size:30px"><h7>%</h7></div>
                                                 </div>
 
@@ -322,9 +293,9 @@ session_start();
 
                                          <div class="row" style="text-align: center;">
                                             <div class="col-sm-12">
-                                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank">送出</button>
+                                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" onclick="calculateAndValidate()" >送出</button>
 <!--    Modal  -->
- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal fade" id="private_key_input" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -332,7 +303,7 @@ session_start();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type=text name="private_key" style="text-align:center;" class="form-control" placeholder="輸入私鑰" aria-label="key">
+        <input type=text name="private_key" id="private_key" style="text-align:center;" class="form-control" placeholder="輸入私鑰" aria-label="key">
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -353,26 +324,7 @@ session_start();
 
 
 
-<!--
-                                      <div class="row gutters-sm">
-                                        <div class="col-sm-6 mb-3">
-                                          <div class="card h-100">
-                                            <div class="card-body">
-                                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">我的</i>活動紀錄</h6>
-                                              <small>發布過幾篇文章:3篇</small>
-                                              <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
-                                              <small>文章獲得的coin:450</small>
-                                              <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
 
-                                        </div>
--->
                                       </div>
 
 
