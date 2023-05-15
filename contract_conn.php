@@ -15,25 +15,9 @@
   $profit_a=$_POST["profit_a"];
   $profit_b=$_POST["profit_b"];
   $profit_c=$_POST["profit_c"];
-  $start_time  = date('Y/m/d H:i:s');
-  $contract_status=$_POST["contract_status"];
-   //$status_a=$_POST["status_a"];
-   //$status_b=$_POST["status_b"];
-   //$status_c=$_POST["status_c"];
-//  if(isset($user_a)){
-//    $status_a = "待確認";
-//  }
-//  if(isset($user_b)){
-//    $status_b = "待確認";
-//  }
-//  if(isset($user_c)){
-//    $status_c = "待確認";
-//  }
-//  echo $status_c;
-//   $status_a=$_POST["status_a"];
-//   $status_b=$_POST["status_b"];
-//   $status_c=$_POST["status_c"];
+  $start_time  = date('Y/m/d H:i:s');      //$contract_status=$_POST["contract_status"];
   $contract_check = $_POST['contract_check'];
+  $contract_status=$_POST["contract_status"];
   $private_key = $_POST['private_key'];
   $contract_id = $_POST["contract_id"];
   $manager_id = $_POST["manager_id"];
@@ -45,10 +29,14 @@
   $contract_id_mer = $_POST["contract_id_mer"];
   $contract_id_user = $_POST["contract_id_user"];
 
-  $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
-//  $conn = mysqli_connect("localhost", "root");
-//          mysqli_select_db($conn, "system");
-
+ $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
+// $conn = mysqli_connect("localhost", "root");        mysqli_select_db($conn, "system");
+$sqlCheck = "update profit_contract set status_merchant = '接受',
+                       contract_status='已簽訂'
+                       where contract_id = '$contract_id_mer';";
+$sqlCheck = "update profit_contract set status_merchant = '駁回',
+                      contract_status='已駁回'
+                        where contract_id = '$contract_id_mer';";
   $sqlIDtransb ="SELECT * FROM `general_user`
                 JOIN account ON general_user.account_id = account.account_id
                 WHERE account.account = $user_b";
@@ -59,10 +47,6 @@
   $recordIDb = mysqli_fetch_row($rsIDb);
   $rsIDc = mysqli_query($conn, $sqlIDtransc);
   $recordIDc = mysqli_fetch_row($rsIDc);
-
-  if (!empty($conn->connect_error)) {
-    die('資料庫連線錯誤:' . $conn->connect_error);
-  }
 
   //user_insert
   if($method == "insert"){
@@ -166,33 +150,68 @@
   //商家確認合約
   //merchant_check(update)
   else if($method == "merchant_check"){
-    $sql = query("select * from profit_contract where contract_id = $contract_id_mer;")[0];
+   $sql = query("select * from profit_contract where contract_id = $contract_id_mer;")[0];
 
       //判斷回應結果
-      if($contract_check==1){
-        echo"yes";
-          $sqlCheck = "update profit_contract set status_merchant = '接受',
+    if (isset($_POST['public_key'])) {
+    $public_key = $_POST['public_key'];
+    $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
+//    $conn = mysqli_connect("localhost", "root");
+//    mysqli_select_db($conn, "system");
+    if (!$conn) {
+        die("連線失敗：" . mysqli_connect_error());
+    }
+ 
+    $query = "SELECT * FROM manager WHERE public_key = '$public_key'";
+    $rs = mysqli_query($conn, $query);
+    if ($rs && mysqli_num_rows($rs) > 0) {
+       $contract_check = $_POST['contract_check'];
+        $contract_id_mer = $_POST["contract_id_mer"];
+        $status_merchant = $_POST["status_merchant"];
+        $contract_id = $_POST["contract_id"];
+        
+        if ($contract_check == 1) {
+$sqlCheck = "update profit_contract set status_merchant = '接受',
                        contract_status='已簽訂'
                        where contract_id = '$contract_id_mer';";
-          echo $sqlCheck;
-      }elseif($contract_check==0){
-        echo 'no';
-        $sqlCheck = "update profit_contract set status_merchant = '駁回',
+  if (!empty($conn->connect_error)) {
+    die('資料庫連線錯誤:' . $conn->connect_error);
+  }
+            if (mysqli_query($conn, $sqlCheck)) {
+                echo 'okok';
+                header('location: merchant_contract_list.php');
+                exit();
+            } else {
+                echo "新增合約內容至資料庫失敗：" . mysqli_error($conn);
+            }
+        } elseif ($contract_check == 0) {
+            $sqlCheck = "update profit_contract set status_merchant = '駁回',
                       contract_status='已駁回'
                         where contract_id = '$contract_id_mer';";
-      }
-    if (mysqli_query($conn, $sqlCheck))
-    echo 'okok';
-      header('location:merchant_contract_list.php');
+            if (mysqli_query($conn, $sqlCheck)) {
+                echo 'okok';
+                header('location: merchant_contract_list.php');
+                exit();
+            } else {
+                echo "新增合約內容至資料庫失敗：" . mysqli_error($conn);
+            }
+        }
+    } else {
+        echo '<script>alert("輸入錯誤"); window.history.go(-1);</script>';
+    }
+} else {
+    echo '<script>alert("輸入錯誤"); window.history.go(-1);</script>';
+}
+ 
   }
   //管理者建立合約
  else if ($method == "manager_insert") {
     //echo $method;
     if (isset($_POST['private_key'])) {
         $private_key = $_POST['private_key'];
-        $conn=mysqli_connect("localhost","root");
-              mysqli_select_db($conn, "system");
-        //$conn = mysqli_connect('localhost', 'root', '12345678', 'system');
+//        $conn=mysqli_connect("localhost","root");
+//              mysqli_select_db($conn, "system");
+        $conn = mysqli_connect('localhost', 'root', '12345678', 'system');
         if (!$conn) {
             die("連線失敗：" . mysqli_connect_error());
         }
