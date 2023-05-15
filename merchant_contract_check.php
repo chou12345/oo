@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+error_reporting(E_ALL);
+ ini_set('display_errors', 1);
 $identity = $_SESSION['identity'];
 //echo $identity;
 $merchant_id = $_SESSION['merchant_id'];
@@ -125,9 +126,6 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
                                 <?php  } ?>
                             </div>
                         </div>
-
-
-
                     </div>
                 </nav>
 
@@ -166,6 +164,9 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
                                         <br>
                                         <?php
                     $conn=mysqli_connect("localhost","root","12345678","system");
+                    //$conn=mysqli_connect("localhost","root");
+                          //mysqli_select_db($conn, "system");
+
                     $sql = "select * from profit_contract";
                     $result = mysqli_query($conn,$sql);
                     $rs=mysqli_query($conn,$sql);
@@ -196,8 +197,8 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
 
                                             </ol>
                                                  <p>平台方提供之項目：</p>
-                                                 <p>1. 於平台方網站提供商家方之資訊及優惠訊息露出。</p>
-                                                 <p>2. 商家於平台內累積coin得轉為新台幣。</p>
+                                                 <p>1. 於平台方網站提供商家方之資訊。</p>
+                                                 <p>2. 商家於平台內累積coin得轉為新台幣(1:1)。</p>
 
                                         </div>
                                         <br><br>
@@ -268,30 +269,30 @@ $contractCheck = query("select * from profit_contract where contract_id = $contr
 
                                          <div class="row" style="text-align: center;">
                                         <div class="col-sm-12">
-                                              <input type="hidden" name="contract_status" value="已簽訂">
+                                              <!-- <input type="hidden" name="contract_status" value="已簽訂"> -->
                                               <input type="hidden" name="contract_id_mer" value="<?php echo $contract_id_mer?>">
-                                              <input type="hidden" name="start_time" value="<?php echo $start_time?>">
 
-
-                                              <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" style="margin-right: 150px;">接受!</button>
-                                              <button type="button"  class="btn btn-primary "
-                                              data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                              target="__blank">駁回。</button>
+                                              <button type="button" class="btn btn-primary" name="contract_check" value="1"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="__blank" style="margin-right: 150px;">
+                                                接受!</button>
+                                              <button type="button"  class="btn btn-primary " name="contract_check" value="0"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"target="__blank">
+                                                駁回。</button>
                                 </form>
 <!--    Modal  -->
  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">請輸入私鑰</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">請輸入公鑰</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type=text style="text-align:center;" class="form-control" placeholder="輸入私鑰" aria-label="key">
+        <input type=text name="public_key" style="text-align:center;" class="form-control" placeholder="輸入公鑰" aria-label="key">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" onclick="location.href=''">確認</button>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" onclick="location.href=''">確認</button>
 <!--        onclick="window.location.href='user_contract_list.php'">確認</button>-->
 <!--          window 轉屬-->
       </div>
